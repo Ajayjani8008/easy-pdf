@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{-- Dynamic SEO Meta Tags --}}
+    <title>{{ $seo['title'] ?? config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="{{ $seo['description'] ?? 'Default description for my PDF tools website.' }}">
+    <meta name="keywords" content="{{ $seo['keywords'] ?? '' }}">
+    <link rel="canonical" href="{{ $seo['canonical'] ?? url()->current() }}">
+
+    {{-- Open Graph Tags --}}
+    <meta property="og:title" content="{{ $seo['title'] ?? config('app.name', 'Laravel') }}">
+    <meta property="og:description" content="{{ $seo['description'] ?? 'Default description for my PDF tools website.' }}">
+    <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
+    <meta property="og:url" content="{{ $seo['canonical'] ?? url()->current() }}">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @stack('styles')
+    @stack('head_scripts')
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+
+    @include('partials.header')
+
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full">
+        @yield('content')
+    </main>
+
+    @include('partials.footer')
+
+    @stack('scripts')
+</body>
+</html>
