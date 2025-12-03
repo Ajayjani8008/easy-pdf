@@ -19,7 +19,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('styles')
-    @stack('head_scripts')
+    @stack('head')
 </head>
 <body class="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
 

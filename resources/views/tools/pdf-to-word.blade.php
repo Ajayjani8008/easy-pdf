@@ -1,5 +1,59 @@
 @extends('layouts.app')
 
+
+{{-- potential SEO benefits  --}}
+@push('head')
+@php
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            [
+                '@type' => 'FAQPage',
+                'mainEntity' => [
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Is this PDF to Word converter really free?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text'  => 'Yes. You can convert PDF to Word online for free with no signup required. We only show light ads to keep the service running.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Will the formatting be preserved when converting from PDF to Word?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text'  => 'In most cases, your fonts, images, tables and layout are preserved accurately. Very complex designs may need small manual adjustments inside Word.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Are my PDF and Word files safe on this website?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text'  => 'Yes. Files are transferred over secure HTTPS and are automatically removed from our servers after a short period of time.',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                '@type'               => 'SoftwareApplication',
+                'name'                => 'Online PDF to Word Converter',
+                'applicationCategory' => 'BusinessApplication',
+                'operatingSystem'     => 'Any',
+                'url'                 => $seo['canonical']   ?? url()->current(),
+                'description'         => $seo['description'] ?? 'Convert PDF to Word free online.',
+                'offers'              => [
+                    '@type'         => 'Offer',
+                    'price'         => '0',
+                    'priceCurrency' => 'USD',
+                ],
+            ],
+        ],
+    ];
+@endphp
+
+
 @section('content')
     <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
