@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,15 +13,18 @@
 
     {{-- Open Graph Tags --}}
     <meta property="og:title" content="{{ $seo['title'] ?? config('app.name', 'Laravel') }}">
-    <meta property="og:description" content="{{ $seo['description'] ?? 'Default description for my PDF tools website.' }}">
+    <meta property="og:description"
+        content="{{ $seo['description'] ?? 'Default description for my PDF tools website.' }}">
     <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
     <meta property="og:url" content="{{ $seo['canonical'] ?? url()->current() }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     @stack('styles')
     @stack('head')
 </head>
+
 <body class="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
 
     @include('partials.header')
@@ -33,4 +37,5 @@
 
     @stack('scripts')
 </body>
+
 </html>
