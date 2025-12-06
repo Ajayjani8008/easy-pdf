@@ -15,7 +15,7 @@
                     <span class="text-xl font-bold text-gray-900 tracking-tight">EasyPDF <span
                             class="font-normal text-gray-500">Pro</span></span>
                 </a>
-                <p class="text-gray-500 text-lg">We make PDF easy.</p>
+                <p class="text-gray-500 text-lg">We make PDF easybb.</p>
             </div>
 
             <!-- Solutions Column -->

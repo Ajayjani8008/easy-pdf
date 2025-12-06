@@ -14,19 +14,10 @@ use App\Http\Controllers\Tool\PdfToWordController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('tools')->name('tools.')->group(function () {
+    Route::get('/pdf-to-word', [PdfToWordController::class, 'index'])->name('pdf-to-word');
 });
-
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::prefix('tools')->group(function () {
-    Route::get('/pdf-to-word', [ToolController::class, 'pdfToWord'])->name('tools.pdf_to_word');
-    // Future:
-    // Route::get('/word-to-pdf', [ToolController::class, 'wordToPdf'])->name('tools.word_to_pdf');
-    // Route::get('/jpg-to-pdf', [ToolController::class, 'jpgToPdf'])->name('tools.jpg_to_pdf');
-});
-
-Route::get('/pdf-to-word', [PdfToWordController::class, 'index'])->name('tools.pdf-to-word');
