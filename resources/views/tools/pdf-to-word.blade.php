@@ -97,6 +97,5 @@
 @push('scripts')
 <script>
     // Example of page-specific JS
-    console.log('PDF to Word tool loaded');
 </script>
 @endpush

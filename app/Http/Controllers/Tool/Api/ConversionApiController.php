@@ -24,24 +24,21 @@ class ConversionApiController extends Controller
             $file = $request->file('file');
             $fileId = Str::uuid()->toString();
             $originalName = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $storedName = "{$fileId}.{$extension}";
-            
-            // Store file
-            $path = $file->storeAs('uploads', $storedName, 'local');
-            $fullPath = storage_path("app/{$path}");
 
-            // Create database record
+            // Create database record first
             $uploadedFile = UploadedFile::create([
                 'file_id' => $fileId,
                 'original_name' => $originalName,
-                'stored_name' => $storedName,
-                'mime_type' => $file->getMimeType(),
-                'size' => $file->getSize(),
-                'path' => $fullPath,
                 'type' => 'pdf',
                 'expires_at' => now()->addHour(),
             ]);
+
+            // Store file using Spatie Media Library
+            $uploadedFile
+                ->addMediaFromRequest('file')
+                ->usingName($originalName)
+                ->usingFileName($fileId . '.' . $file->getClientOriginalExtension())
+                ->toMediaCollection('files');
 
             return response()->json([
                 'success' => true,
@@ -69,7 +66,6 @@ class ConversionApiController extends Controller
         $request->validate([
             'file_id' => 'required|string|exists:uploaded_files,file_id',
         ]);
-
         try {
             $uploadedFile = UploadedFile::where('file_id', $request->file_id)->firstOrFail();
             
@@ -146,18 +142,19 @@ class ConversionApiController extends Controller
     /**
      * Download converted file
      */
-    public function download(string $fileId): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+    public function download(string $fileId): \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\JsonResponse
     {
         $file = UploadedFile::where('file_id', $fileId)->firstOrFail();
+        $media = $file->getFileMedia();
 
-        if (!file_exists($file->path)) {
+        if (!$media || !$media->exists()) {
             return response()->json([
                 'success' => false,
                 'message' => 'File not found',
             ], 404);
         }
 
-        return response()->download($file->path, $file->original_name);
+        return response()->download($media->getPath(), $file->original_name);
     }
 
     /**

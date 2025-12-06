@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -32,12 +33,12 @@ class ProcessConversion implements ShouldQueue
 
         try {
             $uploadedFile = $this->conversionJob->uploadedFile;
-            
-            if (!$uploadedFile || !file_exists($uploadedFile->path)) {
+            $sourceMedia = $uploadedFile->getFileMedia();
+            if (!$uploadedFile || !$sourceMedia || !$sourceMedia->exists()) {
                 throw new \Exception('Source file not found');
             }
 
-            // Generate output file path
+            // Generate output file path (temporary location for conversion)
             $outputFileId = Str::uuid()->toString();
             $extension = $this->converter->getTargetExtension();
             $outputFileName = "{$outputFileId}.{$extension}";
@@ -50,19 +51,27 @@ class ProcessConversion implements ShouldQueue
             }
 
             // Perform conversion
-            $metadata = $this->converter->convert($uploadedFile->path, $outputPath);
+            $metadata = $this->converter->convert($sourceMedia->getPath(), $outputPath);
 
             // Create output file record
             $outputFile = UploadedFile::create([
                 'file_id' => $outputFileId,
                 'original_name' => pathinfo($uploadedFile->original_name, PATHINFO_FILENAME) . ".{$extension}",
-                'stored_name' => $outputFileName,
-                'mime_type' => $this->converter->getTargetMimeType(),
-                'size' => filesize($outputPath),
-                'path' => $outputPath,
                 'type' => $extension,
                 'expires_at' => now()->addHour(),
             ]);
+
+            // Store converted file using Spatie Media Library
+            $outputFile
+                ->addMedia($outputPath)
+                ->usingName($outputFile->original_name)
+                ->usingFileName($outputFileName)
+                ->toMediaCollection('files');
+
+            // Clean up temporary file
+            if (file_exists($outputPath)) {
+                unlink($outputPath);
+            }
 
             // Mark job as completed
             $this->conversionJob->markAsCompleted($outputFileId, $metadata);

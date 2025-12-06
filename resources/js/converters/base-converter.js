@@ -9,7 +9,17 @@ export class BaseConverter {
      * Start conversion process
      */
     async convert(fileId) {
+        // Prevent duplicate API calls
+        if (this._converting) {
+            console.warn('Conversion already in progress, ignoring duplicate call');
+            return { success: false, message: 'Conversion already in progress' };
+        }
+        
+        this._converting = true;
+        
         try {
+            console.log(`BaseConverter: Making API call to /api/convert/${this.conversionType} for file:`, fileId);
+            
             const response = await fetch(`/api/convert/${this.conversionType}`, {
                 method: 'POST',
                 headers: {
@@ -20,16 +30,20 @@ export class BaseConverter {
             });
 
             const data = await response.json();
+            console.log('BaseConverter: API response:', data);
 
             if (data.success) {
                 this.jobId = data.job.id;
+                // Dispatch conversion started event
                 window.dispatchEvent(new CustomEvent('conversion-started'));
                 this.startStatusPolling();
                 return data;
             } else {
+                this._converting = false; // Reset on failure
                 throw new Error(data.message || 'Conversion failed to start');
             }
         } catch (error) {
+            this._converting = false; // Reset on error
             console.error('Conversion error:', error);
             window.dispatchEvent(new CustomEvent('conversion-update', {
                 detail: {
@@ -61,6 +75,7 @@ export class BaseConverter {
 
                     if (data.job.status === 'completed' || data.job.status === 'failed') {
                         this.stopStatusPolling();
+                        this._converting = false; // Reset flag when done
                     }
                 }
             } catch (error) {

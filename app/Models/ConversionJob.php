@@ -30,7 +30,7 @@ class ConversionJob extends Model
      */
     public function uploadedFile(): BelongsTo
     {
-        return $this->belongsTo(UploadedFile::class);
+        return $this->belongsTo(UploadedFile::class, 'uploaded_file_id');
     }
 
     /**
@@ -38,7 +38,7 @@ class ConversionJob extends Model
      */
     public function outputFile(): BelongsTo
     {
-        return $this->belongsTo(UploadedFile::class, 'output_file_id');
+        return $this->belongsTo(UploadedFile::class, 'output_file_id', 'file_id');
     }
 
     /**

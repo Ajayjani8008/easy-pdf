@@ -1,4 +1,4 @@
-<div x-data="pdfPreview()" x-init="init()" class="bg-white rounded-xl shadow-lg border border-gray-200 p-8" x-show="uploadedFileId">
+<div x-data="typeof pdfPreview === 'function' ? pdfPreview() : { uploadedFileId: null, fileName: '', fileSize: '', loading: false, init() {} }" x-init="init()" class="bg-white rounded-xl shadow-lg border border-gray-200 p-8" x-show="uploadedFileId">
     <h2 class="text-xl font-bold text-gray-900 mb-4">PDF Preview</h2>
     
     <div x-show="loading" class="text-center py-12">

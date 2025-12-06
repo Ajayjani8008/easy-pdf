@@ -1,5 +1,18 @@
-<div x-data="conversionPanel()" x-init="init()" class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sticky top-6">
-    <x-conversion-status />
+<div x-data="typeof conversionPanel === 'function' ? conversionPanel() : { conversionStatus: 'idle', outputFileId: null, outputFileName: '', outputFileSize: '', converterManager: null, init() {}, downloadFile() {} }" x-init="init()" class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sticky top-6">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Conversion</h2>
+    
+    {{-- Initial State --}}
+    <div x-show="conversionStatus === 'idle'" class="text-center py-8">
+        <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+        </svg>
+        <p class="text-sm text-gray-600">Upload a PDF file to get started</p>
+    </div>
+    
+    {{-- Always render conversion-status component so it initializes, but hide it when idle --}}
+    <div :class="{ 'hidden': conversionStatus === 'idle' }">
+        <x-conversion-status />
+    </div>
 
     {{-- Download Section (shown when conversion is complete) --}}
     <div x-show="conversionStatus === 'completed'" class="space-y-4 mt-6">

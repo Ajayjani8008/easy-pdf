@@ -10,40 +10,88 @@ export class ConverterManager {
         this.currentFileId = null;
         this.outputFileId = null;
         this.outputFileName = null;
+        this._initialized = false;
+        this._isConverting = false;
     }
 
     /**
      * Initialize the converter manager
      */
     init() {
+        // Prevent multiple initializations
+        if (this._initialized) {
+            console.warn('ConverterManager already initialized, skipping');
+            return;
+        }
+        this._initialized = true;
+
         // Listen for file upload
-        window.addEventListener('file-uploaded', (event) => {
+        const fileUploadHandler = (event) => {
             this.currentFileId = event.detail.id;
-        });
+        };
+        window.addEventListener('file-uploaded', fileUploadHandler);
+        this._fileUploadHandler = fileUploadHandler; // Store reference for cleanup
 
         // Listen for conversion start request
-        window.addEventListener('start-conversion', async () => {
-            if (this.currentFileId) {
-                try {
-                    await this.convert(this.currentFileId);
-                } catch (error) {
-                    console.error('Conversion failed:', error);
-                }
+        const startConversionHandler = async () => {
+            // Prevent duplicate conversions
+            if (this._isConverting) {
+                console.warn('Conversion already in progress, ignoring duplicate request');
+                return;
             }
-        });
+            
+            if (!this.currentFileId) {
+                console.warn('No file ID available for conversion');
+                return;
+            }
+            
+            this._isConverting = true;
+            console.log('ConverterManager: Starting conversion for file:', this.currentFileId);
+            
+            try {
+                await this.convert(this.currentFileId);
+            } catch (error) {
+                console.error('Conversion failed:', error);
+                this._isConverting = false; // Reset on error
+            }
+        };
+        
+        window.addEventListener('start-conversion', startConversionHandler);
+        this._startConversionHandler = startConversionHandler; // Store reference for cleanup
 
         // Listen for conversion completion
-        window.addEventListener('conversion-update', (event) => {
+        const conversionUpdateHandler = (event) => {
             if (event.detail.status === 'completed' && event.detail.output_file) {
                 this.outputFileId = event.detail.output_file.id;
                 this.outputFileName = event.detail.output_file.name;
+                this._isConverting = false; // Reset flag
                 
                 // Dispatch completion event
                 window.dispatchEvent(new CustomEvent('conversion-completed', {
                     detail: event.detail.output_file
                 }));
+            } else if (event.detail.status === 'failed' || event.detail.status === 'error') {
+                this._isConverting = false; // Reset flag on failure
             }
-        });
+        };
+        window.addEventListener('conversion-update', conversionUpdateHandler);
+        this._conversionUpdateHandler = conversionUpdateHandler; // Store reference for cleanup
+    }
+
+    /**
+     * Cleanup event listeners (optional, for cleanup if needed)
+     */
+    destroy() {
+        if (this._fileUploadHandler) {
+            window.removeEventListener('file-uploaded', this._fileUploadHandler);
+        }
+        if (this._startConversionHandler) {
+            window.removeEventListener('start-conversion', this._startConversionHandler);
+        }
+        if (this._conversionUpdateHandler) {
+            window.removeEventListener('conversion-update', this._conversionUpdateHandler);
+        }
+        this._initialized = false;
     }
 
     /**

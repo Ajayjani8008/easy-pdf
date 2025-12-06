@@ -1,4 +1,6 @@
-<div x-data="conversionStatus()" x-init="init()" class="space-y-4">
+<div x-data="typeof window.conversionStatus === 'function' ? window.conversionStatus() : { status: 'idle', message: '', _converting: false, _conversionTimeout: null, init() {}, startConversion() {} }" 
+x-init="init()" 
+class="space-y-4">
     {{-- Uploading Status --}}
     <div x-show="status === 'uploading'" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <div class="flex items-center">
@@ -8,7 +10,7 @@
             </svg>
             <div>
                 <p class="text-sm font-medium text-blue-900">Uploading...</p>
-                <p class="text-xs text-blue-700" x-text="message"></p>
+                <p class="text-xs text-blue-700" x-text="message || ''"></p>
             </div>
         </div>
     </div>
@@ -22,7 +24,7 @@
             </svg>
             <div>
                 <p class="text-sm font-medium text-yellow-900">Converting...</p>
-                <p class="text-xs text-yellow-700" x-text="message"></p>
+                <p class="text-xs text-yellow-700" x-text="message || ''"></p>
             </div>
         </div>
     </div>
@@ -35,19 +37,35 @@
             </svg>
             <div>
                 <p class="text-sm font-medium text-red-900">Error</p>
-                <p class="text-xs text-red-700" x-text="message"></p>
+                <p class="text-xs text-red-700" x-text="message || ''"></p>
             </div>
         </div>
     </div>
 
     {{-- Convert Button (shown when file is uploaded) --}}
     <div x-show="status === 'ready'" class="space-y-2">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+            <p class="text-sm text-blue-700 mb-3" x-text="message || ''"></p>
+        </div>
         <button 
             @click="startConversion()"
-            class="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all"
+            :disabled="status !== 'ready' || _converting"
+            class="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-            Convert to Word
+            <span x-show="!(_converting || status === 'converting')">Convert to Word</span>
+            <span x-show="_converting || status === 'converting'" class="flex items-center justify-center">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Converting...
+            </span>
         </button>
+    </div>
+    
+    {{-- Debug info (remove in production) --}}
+    <div class="mt-4 text-xs text-gray-400" x-show="false">
+        Status: <span x-text="status"></span>
     </div>
 </div>
 

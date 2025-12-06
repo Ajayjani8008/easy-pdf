@@ -1,4 +1,4 @@
-<div x-data="fileUpload()" x-init="init()" class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+<div x-data="typeof fileUpload === 'function' ? fileUpload() : { isDragging: false, selectedFile: null, uploading: false, uploadedFileId: null, init() {}, handleDrop() {}, handleFileSelect() {}, handleFile() {}, uploadFile() {}, formatFileSize() {} }" x-init="init()" class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
     <div 
         @dragover.prevent="isDragging = true"
         @dragleave.prevent="isDragging = false"
@@ -22,9 +22,9 @@
             </svg>
             <p class="text-lg font-medium text-gray-900 mb-2">
                 <span x-show="!selectedFile">Drop your PDF here, or click to browse</span>
-                <span x-show="selectedFile" x-text="selectedFile.name"></span>
+                <span x-show="selectedFile && selectedFile.name" x-text="selectedFile?.name || ''"></span>
             </p>
-            <p class="text-sm text-gray-500" x-show="selectedFile" x-text="selectedFile.sizeText"></p>
+            <p class="text-sm text-gray-500" x-show="selectedFile && selectedFile.sizeText" x-text="selectedFile?.sizeText || ''"></p>
         </div>
     </div>
 

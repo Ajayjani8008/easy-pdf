@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Carbon\Carbon;
 
-class UploadedFile extends Model
+class UploadedFile extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     protected $fillable = [
         'file_id',
         'original_name',
-        'stored_name',
-        'mime_type',
-        'size',
-        'path',
         'type',
         'expires_at',
     ];
@@ -41,6 +41,60 @@ class UploadedFile extends Model
     }
 
     /**
+     * Register media collections
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('files')
+            ->singleFile()
+            ->acceptsMimeTypes(['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']);
+    }
+
+    /**
+     * Get the file media
+     */
+    public function getFileMedia(): ?Media
+    {
+        return $this->getFirstMedia('files');
+    }
+
+    /**
+     * Get file path (for backward compatibility)
+     */
+    public function getPathAttribute(): ?string
+    {
+        $media = $this->getFileMedia();
+        return $media ? $media->getPath() : null;
+    }
+
+    /**
+     * Get file size (for backward compatibility)
+     */
+    public function getSizeAttribute(): ?int
+    {
+        $media = $this->getFileMedia();
+        return $media ? $media->size : null;
+    }
+
+    /**
+     * Get mime type (for backward compatibility)
+     */
+    public function getMimeTypeAttribute(): ?string
+    {
+        $media = $this->getFileMedia();
+        return $media ? $media->mime_type : null;
+    }
+
+    /**
+     * Get stored name (for backward compatibility)
+     */
+    public function getStoredNameAttribute(): ?string
+    {
+        $media = $this->getFileMedia();
+        return $media ? $media->file_name : null;
+    }
+
+    /**
      * Get human readable file size
      */
     public function getHumanReadableSizeAttribute(): string
@@ -55,6 +109,15 @@ class UploadedFile extends Model
         }
         
         return round($size, 2) . ' ' . $units[$unit];
+    }
+
+    /**
+     * Get download URL
+     */
+    public function getDownloadUrlAttribute(): string
+    {
+        $media = $this->getFileMedia();
+        return $media ? $media->getUrl() : '';
     }
 }
 

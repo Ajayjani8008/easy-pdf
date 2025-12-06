@@ -10,12 +10,16 @@ export function conversionPanel() {
         converterManager: null,
 
         init() {
-            // Initialize converter manager
-            this.converterManager = new ConverterManager('word');
-            this.converterManager.init();
+            // Initialize converter manager only once
+            if (!this.converterManager) {
+                this.converterManager = new ConverterManager('word');
+                this.converterManager.init();
+                console.log('ConverterManager initialized in conversion panel');
+            }
 
             // Listen for conversion status updates
             window.addEventListener('conversion-update', (event) => {
+                console.log('Conversion update received:', event.detail);
                 this.conversionStatus = event.detail.status;
                 
                 if (event.detail.status === 'completed' && event.detail.output_file) {
@@ -28,21 +32,14 @@ export function conversionPanel() {
             });
 
             // Listen for file upload
-            window.addEventListener('file-uploaded', () => {
+            window.addEventListener('file-uploaded', (event) => {
+                console.log('File uploaded in panel:', event.detail);
                 this.conversionStatus = 'ready';
+                console.log('Panel status set to ready');
             });
 
-            // Listen for conversion start
-            window.addEventListener('start-conversion', async () => {
-                if (this.converterManager && this.converterManager.currentFileId) {
-                    try {
-                        await this.converterManager.convert(this.converterManager.currentFileId);
-                    } catch (error) {
-                        console.error('Conversion error:', error);
-                        this.conversionStatus = 'error';
-                    }
-                }
-            });
+            // Note: Conversion start is handled by ConverterManager.init()
+            // No need to listen here to avoid duplicate API calls
         },
 
         downloadFile() {

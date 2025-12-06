@@ -65,10 +65,13 @@ export function fileUpload() {
 
                 if (data.success) {
                     this.uploadedFileId = data.file.id;
+                    console.log('File uploaded successfully:', data.file);
                     // Dispatch event for other components
-                    window.dispatchEvent(new CustomEvent('file-uploaded', {
+                    const event = new CustomEvent('file-uploaded', {
                         detail: data.file
-                    }));
+                    });
+                    window.dispatchEvent(event);
+                    console.log('file-uploaded event dispatched');
                     // Clear selected file after successful upload
                     this.selectedFile = null;
                 } else {

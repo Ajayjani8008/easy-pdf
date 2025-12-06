@@ -23,7 +23,22 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        // Ensure Alpine waits for our functions to be available
+        document.addEventListener('alpine:init', () => {
+            // Functions should be available by now from app.js
+            if (typeof window.fileUpload === 'undefined') {
+                console.error('fileUpload function not found!');
+            }
+            if (typeof window.conversionStatus === 'undefined') {
+                console.error('conversionStatus function not found!');
+            }
+        });
+    </script>
 
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
     @stack('styles')
     @stack('head')
 </head>

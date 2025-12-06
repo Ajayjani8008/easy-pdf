@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('file_id')->unique(); // Unique identifier for the file
             $table->string('original_name');
-            $table->string('stored_name'); // Name on disk
-            $table->string('mime_type');
-            $table->bigInteger('size'); // File size in bytes
-            $table->string('path'); // Storage path
             $table->string('type')->default('pdf'); // File type (pdf, docx, etc.)
             $table->timestamp('expires_at'); // Auto-delete after this time
             $table->timestamps();
