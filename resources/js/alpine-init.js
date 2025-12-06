@@ -7,6 +7,7 @@ import { conversionStatus } from './components/conversion-status.js';
 import { conversionPanel } from './converter-panel.js';
 import { mergeFileUpload } from './components/merge-file-upload.js';
 import { mergePanel } from './components/merge-panel.js';
+import { splitPanel } from './components/split-panel.js';
 
 // Make functions available globally immediately
 window.fileUpload = fileUpload;
@@ -15,5 +16,6 @@ window.conversionStatus = conversionStatus;
 window.conversionPanel = conversionPanel;
 window.mergeFileUpload = mergeFileUpload;
 window.mergePanel = mergePanel;
+window.splitPanel = splitPanel;
 
 

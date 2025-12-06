@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Tool\Api\ConversionApiController;
+use App\Http\Controllers\Tool\Api\SplitApiController;
+use App\Http\Controllers\Tool\Api\MergeApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,10 @@ Route::post('/convert/{type}', [ConversionApiController::class, 'convert'])->nam
 Route::get('/conversions/{jobId}/status', [ConversionApiController::class, 'status'])->name('api.conversions.status');
 
 // Merge PDF operations
-use App\Http\Controllers\Tool\Api\MergeApiController;
 
 Route::post('/merge/upload', [MergeApiController::class, 'uploadMultiple'])->name('api.merge.upload');
 Route::post('/merge', [MergeApiController::class, 'merge'])->name('api.merge');
+
+// Split PDF operations
+Route::get('/split/page-count', [SplitApiController::class, 'getPageCount'])->name('api.split.page-count');
+Route::post('/split', [SplitApiController::class, 'split'])->name('api.split');
