@@ -44,15 +44,15 @@ class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
             </p>
             <p class="text-sm text-gray-500">
                 <span x-show="uploadedFiles.length === 0">Click to select one PDF file at a time (2-10 files required)</span>
-                <span x-show="uploadedFiles.length > 0 && uploadedFiles.length < minFiles" 
+                <span x-show="uploadedFiles.length > 0 && uploadedFiles.length < minFiles" x-cloak
                       class="text-orange-600 font-medium">
                     Add at least <span x-text="minFiles - uploadedFiles.length"></span> more file(s) - Click to add another
                 </span>
-                <span x-show="uploadedFiles.length >= minFiles && uploadedFiles.length < maxFiles" 
+                <span x-show="uploadedFiles.length >= minFiles && uploadedFiles.length < maxFiles" x-cloak class="text-green-600 font-medium">
                       class="text-green-600 font-medium">
                     Ready to merge! (<span x-text="uploadedFiles.length"></span> files) - Click to add more
                 </span>
-                <span x-show="uploadedFiles.length >= maxFiles" class="text-blue-600 font-medium">
+                <span x-show="uploadedFiles.length >= maxFiles" x-cloak class="text-blue-600 font-medium">
                     Maximum files reached (<span x-text="uploadedFiles.length"></span> files) - Ready to merge!
                 </span>
             </p>
@@ -60,7 +60,7 @@ class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
     </div>
 
     {{-- Uploaded Files Cards --}}
-    <div x-show="uploadedFiles.length > 0" 
+    <div x-show="uploadedFiles.length > 0" x-cloak
          class="mt-6 space-y-4"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 transform translate-y-4"

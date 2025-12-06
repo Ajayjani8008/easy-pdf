@@ -19,7 +19,7 @@
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-1 items-center">
                 <!-- Tools Dropdown -->
-                <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                <div class="relative" x-data="{ open: false }" x-cloak @click.outside="open = false">
                     <button @click="open = !open"
                         class="group inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none transition-colors duration-200">
                         <svg class="mr-2 h-5 w-5 text-gray-500 group-hover:text-gray-700" fill="none"
@@ -35,7 +35,7 @@
                     </button>
 
                     <!-- Dropdown Menu -->
-                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                    <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200"
                         x-transition:enter-start="opacity-0 translate-y-1"
                         x-transition:enter-end="opacity-100 translate-y-0"
                         x-transition:leave="transition ease-in duration-150"
@@ -84,13 +84,13 @@
                     aria-controls="mobile-menu" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <!-- Icon when menu is closed -->
-                    <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                    <svg x-show="!mobileMenuOpen" x-cloak class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                     <!-- Icon when menu is open -->
-                    <svg x-show="mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg x-show="mobileMenuOpen" x-cloak class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" style="display: none;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
@@ -101,7 +101,7 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu" x-show="mobileMenuOpen"
+    <div class="md:hidden" id="mobile-menu" x-show="mobileMenuOpen" x-cloak
         x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2"
         x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"

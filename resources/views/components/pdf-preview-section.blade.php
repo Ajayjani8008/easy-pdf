@@ -1,27 +1,27 @@
 <div x-data="typeof pdfPreview === 'function' ? pdfPreview() : { uploadedFileId: null, fileName: '', fileSize: '', loading: false, converting: false, converted: false, init() {} }" 
      x-init="init()" 
      class="bg-white rounded-xl shadow-xl border border-gray-200 p-8 transition-all duration-500"
-     x-show="uploadedFileId"
+     x-show="uploadedFileId" x-cloak
      x-transition:enter="transition ease-out duration-500"
      x-transition:enter-start="opacity-0 transform translate-y-4"
      x-transition:enter-end="opacity-100 transform translate-y-0">
     
     <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-bold text-gray-900 flex items-center">
-            <span x-show="!converting && !converted" class="flex items-center">
+            <span x-show="!converting && !converted" x-cloak class="flex items-center">
                 <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
                 </svg>
                 PDF Preview
             </span>
-            <span x-show="converting" class="flex items-center animate-pulse">
+            <span x-show="converting" x-cloak class="flex items-center animate-pulse">
                 <svg class="w-6 h-6 mr-2 text-yellow-500 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
                 Converting...
             </span>
-            <span x-show="converted" class="flex items-center">
+            <span x-show="converted" x-cloak class="flex items-center">
                 <svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
                 </svg>
@@ -29,19 +29,19 @@
             </span>
         </h2>
         <div class="flex items-center space-x-2">
-            <span x-show="!converting && !converted" class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full animate-pulse-glow">
+            <span x-show="!converting && !converted" x-cloak class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full animate-pulse-glow">
                 PDF
             </span>
-            <span x-show="converting" class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full animate-pulse">
+            <span x-show="converting" x-cloak class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full animate-pulse">
                 CONVERTING
             </span>
-            <span x-show="converted" class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
+            <span x-show="converted" x-cloak class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
                 DOCX
             </span>
         </div>
     </div>
     
-    <div x-show="loading" class="text-center py-12">
+    <div x-show="loading" x-cloak class="text-center py-12">
         <div class="inline-block relative">
             <svg class="animate-spin h-16 w-16 text-blue-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -54,7 +54,7 @@
         <p class="text-gray-600 font-medium animate-pulse">Loading PDF preview...</p>
     </div>
 
-    <div x-show="!loading && uploadedFileId" class="space-y-4">
+    <div x-show="!loading && uploadedFileId" x-cloak class="space-y-4">
         {{-- Document Preview Container with Morphing Effect --}}
         <div class="border-2 border-gray-200 rounded-xl p-6 bg-gradient-to-br from-gray-50 to-blue-50 min-h-[400px] flex items-center justify-center transition-all duration-700"
              :class="{
@@ -87,7 +87,7 @@
                 </div>
 
                 {{-- Converting Animation --}}
-                <div x-show="converting" 
+                <div x-show="converting" x-cloak
                      class="relative inline-block mb-4"
                      x-transition:enter="transition ease-out duration-700"
                      x-transition:enter-start="opacity-0 scale-50 rotate-180"
@@ -112,7 +112,7 @@
                 </div>
 
                 {{-- DOC Icon (shown when converted) --}}
-                <div x-show="converted && !converting" 
+                <div x-show="converted && !converting" x-cloak
                      class="relative inline-block mb-4"
                      x-transition:enter="transition ease-out duration-700"
                      x-transition:enter-start="opacity-0 scale-50"
@@ -153,10 +153,10 @@
                     <p class="text-xs text-gray-600 mt-1" x-text="fileSize"></p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <span x-show="!converting && !converted" class="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-md">
+                    <span x-show="!converting && !converted" x-cloak class="px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-full shadow-md">
                         PDF
                     </span>
-                    <span x-show="converting" class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full shadow-md animate-pulse">
+                    <span x-show="converting" x-cloak class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full shadow-md animate-pulse">
                         <span class="inline-flex items-center">
                             <svg class="animate-spin -ml-1 mr-1 h-3 w-3 text-white" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -165,7 +165,7 @@
                             Converting...
                         </span>
                     </span>
-                    <span x-show="converted" class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full shadow-md">
+                    <span x-show="converted" x-cloak class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full shadow-md">
                         DOCX ✓
                     </span>
                 </div>

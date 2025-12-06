@@ -16,7 +16,7 @@ class="space-y-4">
     </div>
 
     {{-- Converting Status with Progress --}}
-    <div x-show="status === 'converting'" 
+    <div x-show="status === 'converting'" x-cloak
          class="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-xl p-6 shadow-lg animate-pulse-glow"
          x-transition:enter="transition ease-out duration-500"
          x-transition:enter-start="opacity-0 scale-95"
@@ -71,7 +71,7 @@ class="space-y-4">
     </div>
 
     {{-- Completed Status --}}
-    <div x-show="status === 'completed'" 
+    <div x-show="status === 'completed'" x-cloak
          class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-6 shadow-lg"
          x-transition:enter="transition ease-out duration-500"
          x-transition:enter-start="opacity-0 scale-95"
@@ -91,7 +91,7 @@ class="space-y-4">
     </div>
 
     {{-- Error Status --}}
-    <div x-show="status === 'error'" 
+    <div x-show="status === 'error'" x-cloak
          class="bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-300 rounded-xl p-6 shadow-lg"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 scale-95"
@@ -108,7 +108,7 @@ class="space-y-4">
     </div>
 
     {{-- Convert Button (shown when file is uploaded) --}}
-    <div x-show="status === 'ready'" 
+    <div x-show="status === 'ready'" x-cloak    
          class="space-y-2"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 transform scale-95"
@@ -127,13 +127,13 @@ class="space-y-4">
             class="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden group"
         >
             <span class="relative z-10 flex items-center justify-center">
-                <span x-show="!(_converting || status === 'converting')" class="flex items-center">
+                <span x-show="!(_converting || status === 'converting')" x-cloak class="flex items-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                     </svg>
             Convert to Word
                 </span>
-                <span x-show="_converting || status === 'converting'" class="flex items-center">
+                <span x-show="_converting || status === 'converting'" x-cloak class="flex items-center">
                     <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -146,7 +146,7 @@ class="space-y-4">
     </div>
     
     {{-- Debug info (remove in production) --}}
-    <div class="mt-4 text-xs text-gray-400" x-show="false">
+    <div class="mt-4 text-xs text-gray-400" x-show="false" x-cloak>
         Status: <span x-text="status"></span>
     </div>
 </div>

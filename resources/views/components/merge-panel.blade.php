@@ -31,7 +31,7 @@ class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 sticky top-6">
             @click="startMerge()"
             :disabled="!canMerge()"
             class="w-full px-6 py-4 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-red-700 hover:to-pink-700 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden group"
-            x-show="canMerge()"
+            x-show="canMerge()" x-cloak
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 scale-95"
             x-transition:enter-end="opacity-100 scale-100">
@@ -46,7 +46,7 @@ class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 sticky top-6">
     </div>
 
     {{-- Merging Status with Progress --}}
-    <div x-show="merging" 
+    <div x-show="merging" x-cloak
          class="space-y-4"
          x-transition:enter="transition ease-out duration-500"
          x-transition:enter-start="opacity-0 scale-95"
@@ -93,30 +93,30 @@ class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 sticky top-6">
                 <div class="flex items-center text-sm" :class="progress > 30 ? 'text-gray-700' : 'text-gray-400'">
                     <div class="w-6 h-6 rounded-full mr-3 flex items-center justify-center"
                          :class="progress > 30 ? 'bg-green-500' : 'bg-gray-300'">
-                        <svg x-show="progress > 30" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg x-show="progress > 30" x-cloak class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <div x-show="progress <= 30" class="w-2 h-2 bg-white rounded-full"></div>
+                        <div x-show="progress <= 30" x-cloak class="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                     <span>Reading PDF content</span>
                 </div>
                 <div class="flex items-center text-sm" :class="progress > 60 ? 'text-gray-700' : 'text-gray-400'">
                     <div class="w-6 h-6 rounded-full mr-3 flex items-center justify-center"
                          :class="progress > 60 ? 'bg-green-500' : 'bg-gray-300'">
-                        <svg x-show="progress > 60" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg x-show="progress > 60" x-cloak class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <div x-show="progress <= 60" class="w-2 h-2 bg-white rounded-full"></div>
+                        <div x-show="progress <= 60" x-cloak class="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                     <span>Combining pages</span>
                 </div>
                 <div class="flex items-center text-sm" :class="progress >= 100 ? 'text-gray-700' : 'text-gray-400'">
                     <div class="w-6 h-6 rounded-full mr-3 flex items-center justify-center"
                          :class="progress >= 100 ? 'bg-green-500' : 'bg-gray-300'">
-                        <svg x-show="progress >= 100" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg x-show="progress >= 100" x-cloak class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <div x-show="progress < 100" class="w-2 h-2 bg-white rounded-full"></div>
+                        <div x-show="progress < 100" x-cloak class="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                     <span>Finalizing merged PDF</span>
                 </div>
@@ -125,7 +125,7 @@ class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 sticky top-6">
     </div>
 
     {{-- Completed Status --}}
-    <div x-show="merged && !merging" 
+    <div x-show="merged && !merging" x-cloak
          class="space-y-4"
          x-transition:enter="transition ease-out duration-500"
          x-transition:enter-start="opacity-0 scale-95"
