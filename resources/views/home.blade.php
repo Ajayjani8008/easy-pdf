@@ -90,6 +90,23 @@
                 <p class="text-sm text-gray-500 leading-relaxed">Reduce file size while optimizing for maximal PDF quality.
                 </p>
             </a>
+            <!-- PDF to JPG -->
+            <a href="{{ route('tools.pdf-to-jpg') }}"
+                class="group p-6 bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col items-start text-left h-full hover:-translate-y-1">
+                <div class="w-12 h-12 mb-4">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <rect x="8" y="8" width="32" height="32" rx="4" fill="#FFD43B" />
+                        <rect x="14" y="14" width="20" height="20" rx="2" stroke="white"
+                            stroke-width="3" />
+                        <circle cx="20" cy="20" r="2" fill="white" />
+                        <path d="M34 28L28 22L14 34" stroke="white" stroke-width="3" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-yellow-500 transition-colors">PDF to JPG
+                </h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Convert each PDF page into a JPG or extract all images
+                    contained in a PDF.</p>
+            </a>
             <!-- PDF to PowerPoint -->
             <a href="#"
                 class="group p-6 bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col items-start text-left h-full hover:-translate-y-1">
@@ -202,25 +219,7 @@
                 </h3>
                 <p class="text-sm text-gray-500 leading-relaxed">Add text, images, shapes or freehand annotations to a PDF
                     document.</p>
-            </a>
-
-            <!-- PDF to JPG -->
-            <a href="#"
-                class="group p-6 bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col items-start text-left h-full hover:-translate-y-1">
-                <div class="w-12 h-12 mb-4">
-                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                        <rect x="8" y="8" width="32" height="32" rx="4" fill="#FFD43B" />
-                        <rect x="14" y="14" width="20" height="20" rx="2" stroke="white"
-                            stroke-width="3" />
-                        <circle cx="20" cy="20" r="2" fill="white" />
-                        <path d="M34 28L28 22L14 34" stroke="white" stroke-width="3" stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-yellow-500 transition-colors">PDF to JPG
-                </h3>
-                <p class="text-sm text-gray-500 leading-relaxed">Convert each PDF page into a JPG or extract all images
-                    contained in a PDF.</p>
-            </a>
+            </a>           
 
             <!-- JPG to PDF -->
             <a href="#"

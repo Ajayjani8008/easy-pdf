@@ -9,6 +9,7 @@ import { mergeFileUpload } from './components/merge-file-upload.js';
 import { mergePanel } from './components/merge-panel.js';
 import { splitPanel } from './components/split-panel.js';
 import { compressPanel } from './components/compress-panel.js';
+import { pdfToJpgPanel } from './components/pdf-to-jpg-panel.js';
 
 // Make functions available globally immediately
 window.fileUpload = fileUpload;
@@ -19,5 +20,6 @@ window.mergeFileUpload = mergeFileUpload;
 window.mergePanel = mergePanel;
 window.splitPanel = splitPanel;
 window.compressPanel = compressPanel;
+window.pdfToJpgPanel = pdfToJpgPanel;
 
 

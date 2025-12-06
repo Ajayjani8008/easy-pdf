@@ -41,3 +41,9 @@ use App\Http\Controllers\Tool\Api\CompressApiController;
 
 Route::get('/compress/file-info', [CompressApiController::class, 'getFileInfo'])->name('api.compress.file-info');
 Route::post('/compress', [CompressApiController::class, 'compress'])->name('api.compress');
+
+// PDF to JPG operations
+use App\Http\Controllers\Tool\Api\PdfToJpgApiController;
+
+Route::get('/pdf-to-jpg/page-count', [PdfToJpgApiController::class, 'getPageCount'])->name('api.pdf-to-jpg.page-count');
+Route::post('/pdf-to-jpg/convert', [PdfToJpgApiController::class, 'convert'])->name('api.pdf-to-jpg.convert');
