@@ -25,3 +25,8 @@ Route::get('/files/{fileId}/download', [ConversionApiController::class, 'downloa
 Route::post('/convert/{type}', [ConversionApiController::class, 'convert'])->name('api.convert');
 Route::get('/conversions/{jobId}/status', [ConversionApiController::class, 'status'])->name('api.conversions.status');
 
+// Merge PDF operations
+use App\Http\Controllers\Tool\Api\MergeApiController;
+
+Route::post('/merge/upload', [MergeApiController::class, 'uploadMultiple'])->name('api.merge.upload');
+Route::post('/merge', [MergeApiController::class, 'merge'])->name('api.merge');
