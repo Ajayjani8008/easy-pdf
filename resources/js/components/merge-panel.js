@@ -43,14 +43,14 @@ export function mergePanel() {
         async startMerge() {
             const uploadComponent = this.getUploadComponent();
             if (!uploadComponent) {
-                alert('Please upload files first');
+                this.showToast('warning', 'No Files', 'Please upload files first.');
                 return;
             }
 
             this.fileIds = uploadComponent.getFileIds();
             
             if (this.fileIds.length < 2) {
-                alert('At least 2 files are required for merging');
+                this.showToast('validation', 'Insufficient Files', 'At least 2 files are required for merging.');
                 return;
             }
 
@@ -58,6 +58,9 @@ export function mergePanel() {
             this.merged = false;
             this.progress = 0;
             this.startProgressAnimation();
+
+            // Show info toast
+            this.showToast('info', 'Merging Started', 'Your PDF files are being merged. Please wait...');
 
             try {
                 const response = await fetch('/api/merge', {
@@ -80,13 +83,15 @@ export function mergePanel() {
                         this.merged = true;
                         this.outputFile = data.file;
                         this.stopProgressAnimation();
+                        // Show success toast
+                        this.showToast('success', 'Merge Complete', 'Your PDF files have been merged successfully!');
                     }, 500);
                 } else {
                     throw new Error(data.message || 'Merge failed');
                 }
             } catch (error) {
                 console.error('Merge error:', error);
-                alert('Merge failed: ' + error.message);
+                this.showToast('error', 'Merge Failed', error.message || 'Something went wrong. Please try again.');
                 this.merging = false;
                 this.stopProgressAnimation();
             }
@@ -113,6 +118,18 @@ export function mergePanel() {
         downloadFile() {
             if (this.outputFile && this.outputFile.download_url) {
                 window.location.href = this.outputFile.download_url;
+                this.showToast('info', 'Download Started', 'Your merged PDF is downloading...');
+            } else {
+                this.showToast('error', 'Download Failed', 'File not available for download.');
+            }
+        },
+
+        showToast(type, title, message) {
+            if (window.showToast) {
+                window.showToast(type, title, message);
+            } else {
+                console.warn('Toast system not available');
+                alert(`${title}: ${message}`);
             }
         }
     };

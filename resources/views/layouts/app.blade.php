@@ -53,6 +53,9 @@
 
     @include('partials.footer')
 
+    {{-- Global Toast Container --}}
+    <x-toast-container />
+
     @stack('scripts')
 </body>
 

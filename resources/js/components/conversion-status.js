@@ -10,33 +10,27 @@ export function conversionStatus() {
         progressInterval: null, // Interval for updating progress
 
         init() {
-            console.log('Conversion status component initialized');
             
             // Store reference to component for event handlers
             const component = this;
             
             // Check for pending events first (events that fired before component initialized)
             if (window._pendingFileUploadEvents && window._pendingFileUploadEvents.length > 0) {
-                console.log('Processing', window._pendingFileUploadEvents.length, 'pending file upload event(s)');
                 const lastEvent = window._pendingFileUploadEvents[window._pendingFileUploadEvents.length - 1];
                 component.status = 'ready';
                 component.message = 'File uploaded successfully. Click convert to proceed.';
-                console.log('Status set to ready from pending event');
                 // Clear processed events
                 window._pendingFileUploadEvents = [];
             }
             
             // Listen for file upload events - use arrow function to preserve 'this'
             const handleFileUploaded = (event) => {
-                console.log('File uploaded event received in conversion-status:', event.detail);
                 component.status = 'ready';
                 component.message = 'File uploaded successfully. Click convert to proceed.';
-                console.log('Status set to ready in conversion-status');
             };
             
             // Register event listener
             window.addEventListener('file-uploaded', handleFileUploaded);
-            console.log('File-uploaded event listener registered in conversion-status');
 
             // Listen for conversion start
             const handleConversionStarted = () => {
@@ -65,7 +59,7 @@ export function conversionStatus() {
                     // Update progress if provided
                     if (event.detail.progress !== undefined) {
                         component.conversionProgress = Math.min(100, Math.max(0, event.detail.progress));
-                    }
+                }
                 }
             };
             window.addEventListener('conversion-update', handleConversionUpdate);

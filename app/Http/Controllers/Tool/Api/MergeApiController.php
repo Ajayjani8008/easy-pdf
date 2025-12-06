@@ -43,18 +43,18 @@ class MergeApiController extends Controller
         $files = $request->file('files');
         $fileCount = count($files);
 
-        // Validate file count
-        if ($fileCount < 2) {
+        // Validate file count (allow single file uploads, but limit max)
+        if ($fileCount < 1) {
             return response()->json([
                 'success' => false,
-                'message' => 'At least 2 PDF files are required for merging.',
+                'message' => 'Please select at least one PDF file.',
             ], 422);
         }
 
         if ($fileCount > 10) {
             return response()->json([
                 'success' => false,
-                'message' => 'Maximum 10 PDF files allowed for merging.',
+                'message' => 'Maximum 10 PDF files allowed per upload. You can upload files one by one.',
             ], 422);
         }
 

@@ -30,11 +30,11 @@ export class BaseConverter {
             });
 
             const data = await response.json();
-            console.log('BaseConverter: API response:', data);
 
             if (data.success) {
                 this.jobId = data.job.id;
                 // Dispatch conversion started event
+                this.showToast('success', 'Conversion Started', 'Conversion started successfully.');
                 window.dispatchEvent(new CustomEvent('conversion-started'));
                 this.startStatusPolling();
                 return data;
@@ -44,7 +44,6 @@ export class BaseConverter {
             }
         } catch (error) {
             this._converting = false; // Reset on error
-            console.error('Conversion error:', error);
             window.dispatchEvent(new CustomEvent('conversion-update', {
                 detail: {
                     status: 'error',

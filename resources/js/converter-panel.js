@@ -12,8 +12,8 @@ export function conversionPanel() {
         init() {
             // Initialize converter manager only once
             if (!this.converterManager) {
-                this.converterManager = new ConverterManager('word');
-                this.converterManager.init();
+            this.converterManager = new ConverterManager('word');
+            this.converterManager.init();
                 console.log('ConverterManager initialized in conversion panel');
             }
 

@@ -29,7 +29,6 @@ class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
             x-ref="fileInput"
             @change="handleFileSelect($event)"
             accept=".pdf,application/pdf"
-            multiple
             class="hidden"
         >
         
@@ -40,17 +39,21 @@ class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
             </svg>
             <p class="text-lg font-medium text-gray-900 mb-2">
-                <span x-show="uploadedFiles.length === 0">Drop PDF files here, or click to browse</span>
+                <span x-show="uploadedFiles.length === 0">Drop PDF file here, or click to select one file</span>
                 <span x-show="uploadedFiles.length > 0" x-text="`${uploadedFiles.length} file(s) uploaded`"></span>
             </p>
             <p class="text-sm text-gray-500">
-                <span x-show="uploadedFiles.length === 0">Select 2-10 PDF files to merge</span>
+                <span x-show="uploadedFiles.length === 0">Click to select one PDF file at a time (2-10 files required)</span>
                 <span x-show="uploadedFiles.length > 0 && uploadedFiles.length < minFiles" 
                       class="text-orange-600 font-medium">
-                    Add at least <span x-text="minFiles - uploadedFiles.length"></span> more file(s)
+                    Add at least <span x-text="minFiles - uploadedFiles.length"></span> more file(s) - Click to add another
                 </span>
-                <span x-show="uploadedFiles.length >= minFiles" class="text-green-600 font-medium">
-                    Ready to merge! (<span x-text="uploadedFiles.length"></span> files)
+                <span x-show="uploadedFiles.length >= minFiles && uploadedFiles.length < maxFiles" 
+                      class="text-green-600 font-medium">
+                    Ready to merge! (<span x-text="uploadedFiles.length"></span> files) - Click to add more
+                </span>
+                <span x-show="uploadedFiles.length >= maxFiles" class="text-blue-600 font-medium">
+                    Maximum files reached (<span x-text="uploadedFiles.length"></span> files) - Ready to merge!
                 </span>
             </p>
         </div>

@@ -22,42 +22,88 @@ export function mergeFileUpload() {
         },
 
         handleFileSelect(event) {
-            const files = Array.from(event.target.files);
-            this.handleFiles(files);
+            const file = event.target.files[0]; // Only take first file (one-by-one selection)
+            if (file) {
+                this.handleFile(file);
+            }
             // Reset input so same file can be selected again
             event.target.value = '';
         },
 
+        handleFile(file) {
+            // Validate file type
+            if (file.type !== 'application/pdf') {
+                this.showToast('error', 'Invalid File Type', 'Please select a PDF file only.');
+                return;
+            }
+
+            // Check total file count
+            if (this.selectedFiles.length >= this.maxFiles) {
+                this.showToast('warning', 'Maximum Files Reached', `Maximum ${this.maxFiles} files allowed. Please remove a file first.`);
+                return;
+            }
+
+            // Validate file size (50MB)
+            if (file.size > 50 * 1024 * 1024) {
+                this.showToast('error', 'File Too Large', `File "${file.name}" exceeds 50MB limit.`);
+                return;
+            }
+
+            // Check if file already exists
+            if (this.selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                this.showToast('warning', 'File Already Added', `File "${file.name}" is already in the list.`);
+                return;
+            }
+
+            // Add file to selected files
+            const fileData = {
+                id: this.generateId(),
+                file: file,
+                name: file.name,
+                size: file.size,
+                sizeText: this.formatFileSize(file.size),
+                uploading: false,
+                uploaded: false,
+                fileId: null,
+            };
+
+            this.selectedFiles.push(fileData);
+
+            // Auto-upload the file
+            this.uploadFile(fileData);
+        },
+
         handleFiles(files) {
+            // Handle multiple files from drag & drop (still allow drag multiple)
             const pdfFiles = files.filter(file => file.type === 'application/pdf');
             
             if (pdfFiles.length === 0) {
-                this.showError('Please select PDF files only.');
+                this.showToast('error', 'Invalid Files', 'Please select PDF files only.');
                 return;
             }
 
             // Check total file count
             const totalFiles = this.selectedFiles.length + pdfFiles.length;
             if (totalFiles > this.maxFiles) {
-                this.showError(`Maximum ${this.maxFiles} files allowed. You already have ${this.selectedFiles.length} files.`);
+                this.showToast('warning', 'Too Many Files', `Maximum ${this.maxFiles} files allowed. You already have ${this.selectedFiles.length} files.`);
                 return;
             }
 
-            // Validate and add files
+            // Validate and add files one by one
             pdfFiles.forEach(file => {
                 // Validate file size (50MB)
                 if (file.size > 50 * 1024 * 1024) {
-                    this.showError(`File "${file.name}" exceeds 50MB limit.`);
+                    this.showToast('error', 'File Too Large', `File "${file.name}" exceeds 50MB limit.`);
                     return;
                 }
 
                 // Check if file already exists
                 if (this.selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
-                    this.showError(`File "${file.name}" is already added.`);
+                    this.showToast('warning', 'File Already Added', `File "${file.name}" is already in the list.`);
                     return;
                 }
 
-                this.selectedFiles.push({
+                const fileData = {
                     id: this.generateId(),
                     file: file,
                     name: file.name,
@@ -66,11 +112,12 @@ export function mergeFileUpload() {
                     uploading: false,
                     uploaded: false,
                     fileId: null,
-                });
-            });
+                };
 
-            // Auto-upload files
-            this.uploadAllFiles();
+                this.selectedFiles.push(fileData);
+                // Upload each file individually
+                this.uploadFile(fileData);
+            });
         },
 
         async uploadAllFiles() {
@@ -85,11 +132,10 @@ export function mergeFileUpload() {
             }
         },
 
-        async uploadFilesBatch(filesToUpload) {
+        async uploadFile(fileData) {
+            fileData.uploading = true;
             const formData = new FormData();
-            filesToUpload.forEach(fileData => {
-                formData.append('files[]', fileData.file);
-            });
+            formData.append('files[]', fileData.file);
 
             try {
                 const response = await fetch('/api/merge/upload', {
@@ -103,24 +149,23 @@ export function mergeFileUpload() {
                 const data = await response.json();
 
                 if (data.success && data.files && data.files.length > 0) {
-                    // Match uploaded files with selected files
-                    filesToUpload.forEach((fileData, index) => {
-                        const uploadedFile = data.files[index] || data.files.find(f => f.name === fileData.name);
-                        if (uploadedFile) {
-                            fileData.uploaded = true;
-                            fileData.fileId = uploadedFile.id;
-                            fileData.uploadedName = uploadedFile.name;
-                            fileData.uploadedSize = uploadedFile.size;
+                    const uploadedFile = data.files.find(f => f.name === fileData.name) || data.files[0];
+                    
+                    fileData.uploaded = true;
+                    fileData.fileId = uploadedFile.id;
+                    fileData.uploadedName = uploadedFile.name;
+                    fileData.uploadedSize = uploadedFile.size;
 
-                            // Add to uploaded files list
-                            this.uploadedFiles.push({
-                                id: fileData.id,
-                                fileId: uploadedFile.id,
-                                name: fileData.name,
-                                size: fileData.sizeText,
-                            });
-                        }
+                    // Add to uploaded files list
+                    this.uploadedFiles.push({
+                        id: fileData.id,
+                        fileId: uploadedFile.id,
+                        name: fileData.name,
+                        size: fileData.sizeText,
                     });
+
+                    // Show success toast
+                    this.showToast('success', 'File Uploaded', `"${fileData.name}" uploaded successfully.`);
 
                     // Dispatch event for other components
                     window.dispatchEvent(new CustomEvent('files-updated-merge', {
@@ -131,11 +176,11 @@ export function mergeFileUpload() {
                 }
             } catch (error) {
                 console.error('Upload error:', error);
-                this.showError(`Failed to upload files: ${error.message}`);
-                // Remove failed files
-                filesToUpload.forEach(fileData => {
-                    this.removeFile(fileData.id);
-                });
+                this.showToast('error', 'Upload Failed', `Failed to upload "${fileData.name}": ${error.message}`);
+                // Remove failed file
+                this.removeFile(fileData.id);
+            } finally {
+                fileData.uploading = false;
             }
         },
 
@@ -171,6 +216,9 @@ export function mergeFileUpload() {
                         size: fileData.sizeText,
                     });
 
+                    // Show success toast
+                    this.showToast('success', 'File Uploaded', `"${fileData.name}" uploaded successfully. ${this.uploadedFiles.length} of ${this.minFiles} files ready.`);
+
                     // Dispatch event for other components
                     window.dispatchEvent(new CustomEvent('file-uploaded-merge', {
                         detail: {
@@ -178,12 +226,19 @@ export function mergeFileUpload() {
                             allFiles: this.uploadedFiles,
                         }
                     }));
+
+                    // Dispatch ready event if we have enough files
+                    if (this.uploadedFiles.length >= this.minFiles) {
+                        window.dispatchEvent(new CustomEvent('merge-ready', {
+                            detail: { files: this.uploadedFiles }
+                        }));
+                    }
                 } else {
                     throw new Error(data.message || 'Upload failed');
                 }
             } catch (error) {
                 console.error('Upload error:', error);
-                this.showError(`Failed to upload "${fileData.name}": ${error.message}`);
+                this.showToast('error', 'Upload Failed', `Failed to upload "${fileData.name}": ${error.message}`);
                 // Remove failed file
                 this.removeFile(fileData.id);
             } finally {
@@ -250,9 +305,15 @@ export function mergeFileUpload() {
             return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
         },
 
-        showError(message) {
-            // You can replace this with a better notification system
-            alert(message);
+        showToast(type, title, message) {
+            // Use global toast notification system
+            if (window.showToast) {
+                window.showToast(type, title, message);
+            } else {
+                // Fallback to alert if toast system not available
+                console.warn('Toast system not available, using alert');
+                alert(`${title}: ${message}`);
+            }
         }
     };
 }

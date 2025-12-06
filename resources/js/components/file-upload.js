@@ -27,13 +27,13 @@ export function fileUpload() {
         handleFile(file) {
             // Validate file type
             if (file.type !== 'application/pdf') {
-                alert('Please select a PDF file.');
+                this.showToast('error', 'Invalid File Type', 'Please select a PDF file only.');
                 return;
             }
 
             // Validate file size (50MB)
             if (file.size > 50 * 1024 * 1024) {
-                alert('File size must not exceed 50MB.');
+                this.showToast('error', 'File Too Large', 'File size must not exceed 50MB.');
                 return;
             }
 
@@ -66,6 +66,10 @@ export function fileUpload() {
                 if (data.success) {
                     this.uploadedFileId = data.file.id;
                     console.log('File uploaded successfully:', data.file);
+                    
+                    // Show success toast
+                    this.showToast('success', 'Upload Successful', `"${data.file.name}" uploaded successfully.`);
+                    
                     // Dispatch event for other components
                     const event = new CustomEvent('file-uploaded', {
                         detail: data.file
@@ -75,11 +79,11 @@ export function fileUpload() {
                     // Clear selected file after successful upload
                     this.selectedFile = null;
                 } else {
-                    alert('Upload failed: ' + (data.message || 'Unknown error'));
+                    this.showToast('error', 'Upload Failed', data.message || 'Unknown error occurred.');
                 }
             } catch (error) {
                 console.error('Upload error:', error);
-                alert('Upload failed. Please try again.');
+                this.showToast('error', 'Upload Failed', 'Please try again. Check your connection and try again.');
             } finally {
                 this.uploading = false;
             }
@@ -91,6 +95,15 @@ export function fileUpload() {
             const sizes = ['Bytes', 'KB', 'MB', 'GB'];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        },
+
+        showToast(type, title, message) {
+            if (window.showToast) {
+                window.showToast(type, title, message);
+            } else {
+                console.warn('Toast system not available');
+                alert(`${title}: ${message}`);
+            }
         }
     };
 }

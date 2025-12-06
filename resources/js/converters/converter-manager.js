@@ -41,17 +41,14 @@ export class ConverterManager {
             }
             
             if (!this.currentFileId) {
-                console.warn('No file ID available for conversion');
                 return;
             }
             
             this._isConverting = true;
-            console.log('ConverterManager: Starting conversion for file:', this.currentFileId);
             
             try {
                 await this.convert(this.currentFileId);
             } catch (error) {
-                console.error('Conversion failed:', error);
                 this._isConverting = false; // Reset on error
             }
         };
