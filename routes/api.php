@@ -35,3 +35,9 @@ Route::post('/merge', [MergeApiController::class, 'merge'])->name('api.merge');
 // Split PDF operations
 Route::get('/split/page-count', [SplitApiController::class, 'getPageCount'])->name('api.split.page-count');
 Route::post('/split', [SplitApiController::class, 'split'])->name('api.split');
+
+// Compress PDF operations
+use App\Http\Controllers\Tool\Api\CompressApiController;
+
+Route::get('/compress/file-info', [CompressApiController::class, 'getFileInfo'])->name('api.compress.file-info');
+Route::post('/compress', [CompressApiController::class, 'compress'])->name('api.compress');

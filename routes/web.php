@@ -17,6 +17,7 @@ use App\Http\Controllers\Tool\PdfToWordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Tool\MergePdfController;
 use App\Http\Controllers\Tool\SplitPdfController;
+use App\Http\Controllers\Tool\CompressPdfController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -24,4 +25,5 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/pdf-to-word', [PdfToWordController::class, 'index'])->name('pdf-to-word');
     Route::get('/merge-pdf', [MergePdfController::class, 'index'])->name('merge-pdf');
     Route::get('/split-pdf', [SplitPdfController::class, 'index'])->name('split-pdf');
+    Route::get('/compress-pdf', [CompressPdfController::class, 'index'])->name('compress-pdf');
 });
