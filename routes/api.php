@@ -47,3 +47,9 @@ use App\Http\Controllers\Tool\Api\PdfToJpgApiController;
 
 Route::get('/pdf-to-jpg/page-count', [PdfToJpgApiController::class, 'getPageCount'])->name('api.pdf-to-jpg.page-count');
 Route::post('/pdf-to-jpg/convert', [PdfToJpgApiController::class, 'convert'])->name('api.pdf-to-jpg.convert');
+
+// JPG to PDF operations
+use App\Http\Controllers\Tool\Api\JpgToPdfApiController;
+
+Route::post('/jpg-to-pdf/upload', [JpgToPdfApiController::class, 'uploadMultiple'])->name('api.jpg-to-pdf.upload');
+Route::post('/jpg-to-pdf/convert', [JpgToPdfApiController::class, 'convert'])->name('api.jpg-to-pdf.convert');

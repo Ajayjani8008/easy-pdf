@@ -292,7 +292,7 @@ class YourController extends BaseConverterController {
 
 After adding a new tool, test:
 
-- [ ] **Check case studies** - Review existing tools (PDF to Word, Merge PDF, Split PDF) for patterns and edge cases
+- [ ] **Check case studies** - Review existing tools (PDF to Word, Merge PDF, Split PDF, JPG to PDF) for patterns and edge cases
 - [ ] File upload works
 - [ ] File preview shows correctly
 - [ ] Convert button appears
@@ -305,6 +305,8 @@ After adding a new tool, test:
 - [ ] Error handling works (try invalid file)
 - [ ] **State reset works** - Upload new file after completion resets UI properly
 - [ ] **Multiple operations** - Can perform multiple conversions/splits/merges in sequence
+- [ ] **Re-conversion works** - After download, settings remain available for adjustment and re-conversion (see JPG to PDF case study)
+- [ ] **Settings persistence** - Settings are preserved when resetting conversion state
 
 ---
 

@@ -222,7 +222,7 @@
             </a>           
 
             <!-- JPG to PDF -->
-            <a href="#"
+            <a href="{{ route('tools.jpg-to-pdf') }}"
                 class="group p-6 bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col items-start text-left h-full hover:-translate-y-1">
                 <div class="w-12 h-12 mb-4">
                     <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">

@@ -152,12 +152,24 @@ Backend: Returns file download
    - Handling user input validation
    - Edge case: Reset state when new file uploaded after completion
 
+4. **JPG to PDF** (`app/Services/JpgToPdf/JpgToPdfService.php`, `resources/views/tools/jpg-to-pdf.blade.php`)
+   - Multiple image upload pattern
+   - Image reordering functionality
+   - State reset when new images are added after conversion
+   - Re-conversion workflow: After download, show settings again for adjustment
+   - Settings persistence: Keep settings when resetting conversion state
+   - Edge case: Reset conversion state when new images added (even if conversion completed)
+   - Edge case: After download, allow re-conversion with different settings
+
 **Key patterns to observe:**
 - How state is reset when new files are uploaded
 - How errors are handled and displayed
 - How UI transitions between states (idle → ready → processing → completed)
 - How toast notifications are used
 - How file validation is implemented
+- How to allow re-conversion after download (JPG to PDF pattern)
+- How to reset conversion state when new files/images are added
+- How to preserve settings while resetting conversion state
 
 ### Example: Adding "PDF to Excel" Converter
 
@@ -561,6 +573,8 @@ Route::get('/pdf-to-powerpoint', [PdfToPowerPointController::class, 'index'])
 - [ ] Create view file in `resources/views/tools/`
 - [ ] Test upload → convert → download flow
 - [ ] **Test edge cases** - Multiple file uploads, state reset on new upload, error handling
+- [ ] **Implement state reset** - Reset conversion state when new files/images added (see Split PDF, JPG to PDF case studies)
+- [ ] **Implement re-conversion** - For tools with settings, allow re-conversion after download (see JPG to PDF case study)
 
 ---
 
@@ -595,6 +609,8 @@ Route::get('/pdf-to-powerpoint', [PdfToPowerPointController::class, 'index'])
 6. **Logging**: Use `$this->log()` in converters for debugging
 7. **Validation**: BasePdfConverter handles PDF validation automatically
 8. **State Reset**: Always implement state reset when new files are uploaded (see Split PDF case study)
+9. **Re-conversion Pattern**: For tools with settings (like JPG to PDF), allow re-conversion after download by resetting conversion state but keeping settings (see JPG to PDF case study)
+10. **Settings Persistence**: When resetting conversion state, preserve user settings so they can adjust and convert again
 
 ---
 

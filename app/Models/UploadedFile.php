@@ -47,7 +47,21 @@ class UploadedFile extends Model implements HasMedia
     {
         $this->addMediaCollection('files')
             ->singleFile()
-            ->acceptsMimeTypes(['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']);
+            ->acceptsMimeTypes([
+                // PDF files
+                'application/pdf',
+                // Word documents
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/msword',
+                // Image files
+                'image/jpeg',
+                'image/jpg',
+                'image/png',
+                'image/gif',
+                'image/webp',
+                // ZIP files (for merged/split PDFs)
+                'application/zip',
+            ]);
     }
 
     /**
