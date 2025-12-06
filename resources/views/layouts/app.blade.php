@@ -18,6 +18,9 @@
     <meta property="og:type" content="{{ $seo['og_type'] ?? 'website' }}">
     <meta property="og:url" content="{{ $seo['canonical'] ?? url()->current() }}">
 
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -29,7 +32,7 @@
 
     @include('partials.header')
 
-    <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full">
+    <main class="flex-grow w-full">
         @yield('content')
     </main>
 

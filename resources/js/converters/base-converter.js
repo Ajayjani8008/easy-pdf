@@ -1,0 +1,102 @@
+export class BaseConverter {
+    constructor(conversionType) {
+        this.conversionType = conversionType;
+        this.jobId = null;
+        this.statusCheckInterval = null;
+    }
+
+    /**
+     * Start conversion process
+     */
+    async convert(fileId) {
+        try {
+            const response = await fetch(`/api/convert/${this.conversionType}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                },
+                body: JSON.stringify({ file_id: fileId })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                this.jobId = data.job.id;
+                window.dispatchEvent(new CustomEvent('conversion-started'));
+                this.startStatusPolling();
+                return data;
+            } else {
+                throw new Error(data.message || 'Conversion failed to start');
+            }
+        } catch (error) {
+            console.error('Conversion error:', error);
+            window.dispatchEvent(new CustomEvent('conversion-update', {
+                detail: {
+                    status: 'error',
+                    error: error.message
+                }
+            }));
+            throw error;
+        }
+    }
+
+    /**
+     * Poll for conversion status
+     */
+    startStatusPolling() {
+        this.statusCheckInterval = setInterval(async () => {
+            try {
+                const response = await fetch(`/api/conversions/${this.jobId}/status`);
+                const data = await response.json();
+
+                if (data.success) {
+                    window.dispatchEvent(new CustomEvent('conversion-update', {
+                        detail: {
+                            status: data.job.status,
+                            message: this.getStatusMessage(data.job.status),
+                            ...data.job
+                        }
+                    }));
+
+                    if (data.job.status === 'completed' || data.job.status === 'failed') {
+                        this.stopStatusPolling();
+                    }
+                }
+            } catch (error) {
+                console.error('Status check error:', error);
+                this.stopStatusPolling();
+                window.dispatchEvent(new CustomEvent('conversion-update', {
+                    detail: {
+                        status: 'error',
+                        error: 'Failed to check conversion status'
+                    }
+                }));
+            }
+        }, 2000); // Check every 2 seconds
+    }
+
+    /**
+     * Stop polling for status
+     */
+    stopStatusPolling() {
+        if (this.statusCheckInterval) {
+            clearInterval(this.statusCheckInterval);
+            this.statusCheckInterval = null;
+        }
+    }
+
+    /**
+     * Get status message
+     */
+    getStatusMessage(status) {
+        const messages = {
+            'pending': 'Conversion is queued...',
+            'processing': 'Converting your PDF...',
+            'completed': 'Conversion completed!',
+            'failed': 'Conversion failed'
+        };
+        return messages[status] || 'Processing...';
+    }
+}
+

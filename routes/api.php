@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Tool\Api\ConversionApiController;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/
+
+// File upload
+Route::post('/upload', [ConversionApiController::class, 'upload'])->name('api.upload');
+
+// File operations
+Route::get('/files/{fileId}/preview', [ConversionApiController::class, 'preview'])->name('api.files.preview');
+Route::get('/files/{fileId}/download', [ConversionApiController::class, 'download'])->name('api.files.download');
+
+// Conversion operations
+Route::post('/convert/{type}', [ConversionApiController::class, 'convert'])->name('api.convert');
+Route::get('/conversions/{jobId}/status', [ConversionApiController::class, 'status'])->name('api.conversions.status');
+

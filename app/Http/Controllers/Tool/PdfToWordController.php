@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Tool;
 
-use App\Http\Controllers\Controller;
-
-class PdfToWordController extends Controller
+class PdfToWordController extends BaseConverterController
 {
-    public function index()
+    protected function getConversionType(): string
     {
-        $seo = [
-            'title' => 'PDF to Word Converter | '.env('APP_NAME'),
-            'description' => 'Free online PDF to Word converter. No signup required. Convert your PDF documents to editable Word files instantly.',
-            'keywords' => 'pdf to word, convert pdf, docx, online tool, free pdf converter',
-            'canonical' => url()->current(),
-            'og_type' => 'website',
-        ];
+        return 'pdf-to-word';
+    }
 
-        return view('tools.pdf-to-word', compact('seo'));
+    protected function getToolName(): string
+    {
+        return 'PDF to Word Converter';
     }
 }

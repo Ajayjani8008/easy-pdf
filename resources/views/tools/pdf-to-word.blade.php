@@ -55,63 +55,31 @@
 
 
 @section('content')
-    <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">PDF to Word Converter</h1>
-            <p class="text-lg text-gray-600">
-                Convert your PDF files to editable Word documents (DOCX) for free. 
-                Fast, secure, and easy to use. No registration required.
-            </p>
-        </div>
-
-        {{-- Tool Placeholder --}}
-        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center mb-12">
-            <div class="border-2 border-dashed border-gray-300 rounded-lg p-12 hover:border-blue-500 transition-colors cursor-pointer bg-gray-50">
-                <div class="text-gray-500">
-                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
-                    </svg>
-                    <span class="mt-2 block text-sm font-medium text-gray-900">
-                        Drop your PDF here, or click to browse
-                    </span>
-                </div>
-            </div>
-            <button class="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all">
-                Select PDF File
-            </button>
-        </div>
-
-        {{-- Description --}}
-        <div class="prose prose-blue max-w-none mb-12">
-            <h2>How to Convert PDF to Word?</h2>
-            <p>
-                Our online PDF to Word converter allows you to easily transform your PDF documents into editable Word files. 
-                Whether you need to edit text, extract tables, or repurpose content, our tool maintains the original formatting 
-                of your document.
-            </p>
-            <p>
-                Simply upload your file, wait for the conversion to process, and download your new DOCX file. 
-                It's that simple! We prioritize your privacy and delete all files from our servers after one hour.
-            </p>
-        </div>
-
-        {{-- FAQ Section --}}
-        <div class="space-y-6">
-            <h2 class="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+    <x-converter-layout 
+        tool-name="PDF to Word Converter"
+        tool-description="Convert your PDF files to editable Word documents (DOCX) for free. Fast, secure, and easy to use. No registration required."
+    />
+    
+    {{-- FAQ Section --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
             
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Is this tool free?</h3>
-                <p class="text-gray-600">Yes, our PDF to Word converter is 100% free to use with no hidden limits.</p>
-            </div>
+            <div class="space-y-4">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Is this tool free?</h3>
+                    <p class="text-gray-600">Yes, our PDF to Word converter is 100% free to use with no hidden limits.</p>
+                </div>
 
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Do I need to install software?</h3>
-                <p class="text-gray-600">No, this is a web-based tool. You can use it from any device with a browser.</p>
-            </div>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Do I need to install software?</h3>
+                    <p class="text-gray-600">No, this is a web-based tool. You can use it from any device with a browser.</p>
+                </div>
 
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Is my data safe?</h3>
-                <p class="text-gray-600">Absolutely. We use SSL encryption and automatically delete your files after conversion.</p>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Is my data safe?</h3>
+                    <p class="text-gray-600">Absolutely. We use SSL encryption and automatically delete your files after conversion.</p>
+                </div>
             </div>
         </div>
     </div>
