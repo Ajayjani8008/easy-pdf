@@ -156,7 +156,7 @@
                     <h3 class="font-semibold text-gray-900 mb-2">Compress PDF</h3>
                     <p class="text-sm text-gray-600">Reduce PDF file size without losing quality</p>
                 </a>
-                <a href="#" class="bg-white rounded-lg p-4 hover:shadow-md transition-shadow border border-gray-200">
+                <a href="{{ route('tools.split') }}" class="bg-white rounded-lg p-4 hover:shadow-md transition-shadow border border-gray-200">
                     <h3 class="font-semibold text-gray-900 mb-2">Split PDF</h3>
                     <p class="text-sm text-gray-600">Separate PDF pages into individual files</p>
                 </a>

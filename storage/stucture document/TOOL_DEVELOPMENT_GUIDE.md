@@ -131,6 +131,34 @@ Backend: Returns file download
 
 ## ➕ How to Add a New Tool
 
+### ⚠️ Important: Check Case Studies First
+
+**Before starting any new tool implementation, always review existing tools as case studies:**
+
+1. **PDF to Word** (`app/Services/PdfConverter/PdfToWordConverter.php`, `resources/views/tools/pdf-to-word.blade.php`)
+   - Single file upload pattern
+   - Conversion workflow with status polling
+   - State management and reset patterns
+
+2. **Merge PDF** (`app/Services/PdfMerger/PdfMergerService.php`, `resources/views/tools/merge.blade.php`)
+   - Multiple file upload pattern
+   - File reordering functionality
+   - One-by-one file selection design
+   - State management for multiple files
+
+3. **Split PDF** (`app/Services/PdfSplitter/PdfSplitterService.php`, `resources/views/tools/split-pdf.blade.php`)
+   - Page range selection UI
+   - State reset on new file upload (important edge case)
+   - Handling user input validation
+   - Edge case: Reset state when new file uploaded after completion
+
+**Key patterns to observe:**
+- How state is reset when new files are uploaded
+- How errors are handled and displayed
+- How UI transitions between states (idle → ready → processing → completed)
+- How toast notifications are used
+- How file validation is implemented
+
 ### Example: Adding "PDF to Excel" Converter
 
 ### Step 1: Create Service Converter
@@ -487,6 +515,14 @@ Route::get('/pdf-to-powerpoint', [PdfToPowerPointController::class, 'index'])
 
 ## 🔑 Key Points to Remember
 
+### Before Starting
+1. **Always Check Case Studies**: Review existing tools (PDF to Word, Merge PDF, Split PDF) to understand:
+   - State management patterns
+   - Edge cases (e.g., state reset on new file upload)
+   - Error handling approaches
+   - UI/UX patterns
+   - Component communication patterns
+
 ### Backend (PHP/Laravel)
 1. **Service Layer**: All converters must implement `PdfConverterInterface`
 2. **Base Class**: Use `BasePdfConverter` for common functionality
@@ -515,6 +551,7 @@ Route::get('/pdf-to-powerpoint', [PdfToPowerPointController::class, 'index'])
 
 ## 🎯 Quick Checklist for New Tool
 
+- [ ] **Check case studies** - Review existing tools (PDF to Word, Merge PDF, Split PDF) to understand patterns, edge cases, and state management
 - [ ] Create converter service class extending `BasePdfConverter`
 - [ ] Register converter in `ConversionApiController@getConverter()`
 - [ ] Create frontend converter class extending `BaseConverter`
@@ -523,6 +560,7 @@ Route::get('/pdf-to-powerpoint', [PdfToPowerPointController::class, 'index'])
 - [ ] Add web route in `routes/web.php`
 - [ ] Create view file in `resources/views/tools/`
 - [ ] Test upload → convert → download flow
+- [ ] **Test edge cases** - Multiple file uploads, state reset on new upload, error handling
 
 ---
 
@@ -549,12 +587,14 @@ Route::get('/pdf-to-powerpoint', [PdfToPowerPointController::class, 'index'])
 
 ## 💡 Tips
 
-1. **Reuse Components**: The UI components are designed to work with any converter type
-2. **Follow Patterns**: Use existing converters as templates
-3. **Test Incrementally**: Test each step (upload, convert, download) separately
-4. **Error Handling**: Always handle exceptions in converter services
-5. **Logging**: Use `$this->log()` in converters for debugging
-6. **Validation**: BasePdfConverter handles PDF validation automatically
+1. **Check Case Studies First**: Always review existing tools (PDF to Word, Merge PDF, Split PDF) before implementing new ones
+2. **Reuse Components**: The UI components are designed to work with any converter type
+3. **Follow Patterns**: Use existing converters as templates
+4. **Test Incrementally**: Test each step (upload, convert, download) separately
+5. **Error Handling**: Always handle exceptions in converter services
+6. **Logging**: Use `$this->log()` in converters for debugging
+7. **Validation**: BasePdfConverter handles PDF validation automatically
+8. **State Reset**: Always implement state reset when new files are uploaded (see Split PDF case study)
 
 ---
 

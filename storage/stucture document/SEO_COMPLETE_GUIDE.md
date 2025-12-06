@@ -13,8 +13,9 @@
 
 ## ✅ SEO Checklist for Every New Tool
 
-When creating a new tool page, follow these **8 mandatory points**:
+When creating a new tool page, follow these **9 mandatory points**:
 
+- [ ] **0. Check Case Studies** - Review existing tools (PDF to Word, Merge PDF, Split PDF) to understand implementation patterns, state management, and edge cases before starting
 - [ ] **1. Clean URL** - Use `/tool-name` format (no IDs, no query strings)
 - [ ] **2. Unique SEO Title** - Format: `{ToolName} | Free Online {Short Benefit} | {BrandName}`
 - [ ] **3. Unique Meta Description** - 150-160 characters, keyword-rich
