@@ -53,6 +53,12 @@ class UploadedFile extends Model implements HasMedia
                 // Word documents
                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 'application/msword',
+                // Excel files
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+                'application/vnd.ms-excel', // .xls
+                'text/csv', // CSV files
+                'text/plain', // CSV files (sometimes detected as text/plain)
+                'text/comma-separated-values', // Alternative CSV MIME type
                 // Image files
                 'image/jpeg',
                 'image/jpg',

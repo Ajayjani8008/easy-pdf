@@ -127,7 +127,7 @@
             </a>
 
             <!-- PDF to Excel -->
-            <a href="#"
+            <a href="{{ route('tools.pdf-to-excel') }}"
                 class="group p-6 bg-white rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col items-start text-left h-full hover:-translate-y-1">
                 <div class="w-12 h-12 mb-4">
                     <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
@@ -141,8 +141,7 @@
                 </div>
                 <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-500 transition-colors">PDF to Excel
                 </h3>
-                <p class="text-sm text-gray-500 leading-relaxed">Pull data straight from PDFs into Excel spreadsheets in a
-                    few short seconds.</p>
+                <p class="text-sm text-gray-500 leading-relaxed">Extract tables and data from PDFs to Excel spreadsheets (XLSX) or CSV format.</p>
             </a>
 
             <!-- Word to PDF -->

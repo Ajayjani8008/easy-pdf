@@ -53,3 +53,9 @@ use App\Http\Controllers\Tool\Api\JpgToPdfApiController;
 
 Route::post('/jpg-to-pdf/upload', [JpgToPdfApiController::class, 'uploadMultiple'])->name('api.jpg-to-pdf.upload');
 Route::post('/jpg-to-pdf/convert', [JpgToPdfApiController::class, 'convert'])->name('api.jpg-to-pdf.convert');
+
+// PDF to Excel operations
+use App\Http\Controllers\Tool\Api\PdfToExcelApiController;
+
+Route::get('/pdf-to-excel/info/{fileId}', [PdfToExcelApiController::class, 'getPdfInfo'])->name('api.pdf-to-excel.info');
+Route::post('/pdf-to-excel/convert', [PdfToExcelApiController::class, 'convert'])->name('api.pdf-to-excel.convert');

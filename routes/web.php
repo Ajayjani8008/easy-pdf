@@ -20,6 +20,7 @@ use App\Http\Controllers\Tool\SplitPdfController;
 use App\Http\Controllers\Tool\CompressPdfController;
 use App\Http\Controllers\Tool\PdfToJpgController;
 use App\Http\Controllers\Tool\JpgToPdfController;
+use App\Http\Controllers\Tool\PdfToExcelController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -30,4 +31,5 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/compress-pdf', [CompressPdfController::class, 'index'])->name('compress-pdf');
     Route::get('/pdf-to-jpg', [PdfToJpgController::class, 'index'])->name('pdf-to-jpg');
     Route::get('/jpg-to-pdf', [JpgToPdfController::class, 'index'])->name('jpg-to-pdf');
+    Route::get('/pdf-to-excel', [PdfToExcelController::class, 'index'])->name('pdf-to-excel');
 });
