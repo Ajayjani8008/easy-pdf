@@ -59,3 +59,9 @@ use App\Http\Controllers\Tool\Api\PdfToExcelApiController;
 
 Route::get('/pdf-to-excel/info/{fileId}', [PdfToExcelApiController::class, 'getPdfInfo'])->name('api.pdf-to-excel.info');
 Route::post('/pdf-to-excel/convert', [PdfToExcelApiController::class, 'convert'])->name('api.pdf-to-excel.convert');
+
+// Word to PDF operations
+use App\Http\Controllers\Tool\Api\WordToPdfApiController;
+
+Route::post('/word-to-pdf/upload', [WordToPdfApiController::class, 'upload'])->name('api.word-to-pdf.upload');
+Route::post('/word-to-pdf/convert', [WordToPdfApiController::class, 'convert'])->name('api.word-to-pdf.convert');

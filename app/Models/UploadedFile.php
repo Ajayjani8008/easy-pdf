@@ -51,8 +51,11 @@ class UploadedFile extends Model implements HasMedia
                 // PDF files
                 'application/pdf',
                 // Word documents
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+                'application/msword', // .doc
+                'application/rtf', // .rtf
+                'text/rtf', // .rtf (alternative)
+                'application/vnd.oasis.opendocument.text', // .odt
                 // Excel files
                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
                 'application/vnd.ms-excel', // .xls

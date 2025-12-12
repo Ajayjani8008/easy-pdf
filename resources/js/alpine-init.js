@@ -13,6 +13,7 @@ import { pdfToJpgPanel } from './components/pdf-to-jpg-panel.js';
 import { jpgToPdfUpload } from './components/jpg-to-pdf-upload.js';
 import { jpgToPdfPanel } from './components/jpg-to-pdf-panel.js';
 import { pdfToExcelPanel } from './components/pdf-to-excel-panel.js';
+import { wordToPdfPanel } from './components/word-to-pdf-panel.js';
 
 // Make functions available globally immediately
 window.fileUpload = fileUpload;
@@ -27,5 +28,6 @@ window.pdfToJpgPanel = pdfToJpgPanel;
 window.jpgToPdfUpload = jpgToPdfUpload;
 window.jpgToPdfPanel = jpgToPdfPanel;
 window.pdfToExcelPanel = pdfToExcelPanel;
+window.wordToPdfPanel = wordToPdfPanel;
 
 

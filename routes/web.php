@@ -21,6 +21,7 @@ use App\Http\Controllers\Tool\CompressPdfController;
 use App\Http\Controllers\Tool\PdfToJpgController;
 use App\Http\Controllers\Tool\JpgToPdfController;
 use App\Http\Controllers\Tool\PdfToExcelController;
+use App\Http\Controllers\Tool\WordToPdfController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -32,4 +33,5 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/pdf-to-jpg', [PdfToJpgController::class, 'index'])->name('pdf-to-jpg');
     Route::get('/jpg-to-pdf', [JpgToPdfController::class, 'index'])->name('jpg-to-pdf');
     Route::get('/pdf-to-excel', [PdfToExcelController::class, 'index'])->name('pdf-to-excel');
+    Route::get('/word-to-pdf', [WordToPdfController::class, 'index'])->name('word-to-pdf');
 });

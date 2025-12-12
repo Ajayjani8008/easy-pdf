@@ -71,7 +71,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             {{-- Left: Upload Area --}}
             <div class="lg:col-span-2">
-                <x-file-upload-area />
+                <x-file-upload-area 
+                    accept=".pdf,application/pdf"
+                    :max-size="51200"
+                    upload-url="/api/upload"
+                    file-type-label="PDF"
+                    upload-button-text="Upload PDF"
+                />
             </div>
 
             {{-- Right: Options Panel --}}

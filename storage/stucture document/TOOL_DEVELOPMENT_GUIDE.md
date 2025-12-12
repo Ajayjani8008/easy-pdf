@@ -630,3 +630,5 @@ The architecture is designed for **maximum reusability** - most of the code is s
 **Last Updated:** December 2024
 **Version:** 1.0
 
+file-upload-area:
+   <x-file-upload-area        accept=".doc,.docx,.rtf,.odt,application/msword,..."       :max-size="51200"       upload-url="/api/word-to-pdf/upload"       file-type-label="Word Document"       upload-button-text="Upload Word Document"   />

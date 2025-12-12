@@ -81,7 +81,13 @@
             {{-- Left: Upload Section (2 columns) --}}
             <div class="lg:col-span-2 space-y-6">
                 <div class="animate-slide-up">
-                    <x-file-upload-area />
+                    <x-file-upload-area 
+                        accept=".pdf,application/pdf"
+                        :max-size="51200"
+                        upload-url="/api/upload"
+                        file-type-label="PDF"
+                        upload-button-text="Upload PDF"
+                    />
                 </div>
                 
                 {{-- PDF Preview --}}
