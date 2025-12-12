@@ -112,5 +112,13 @@ export class BaseConverter {
         };
         return messages[status] || 'Processing...';
     }
+    showToast(type, title, message) {
+        if (window.showToast) {
+            window.showToast(type, title, message);
+        } else {
+            console.warn('Toast system not available');
+            alert(`${title}: ${message}`);
+        }
+    }
 }
 
