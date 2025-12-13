@@ -15,17 +15,20 @@
                     <span class="text-xl font-bold text-gray-900 tracking-tight">EasyPDF <span
                             class="font-normal text-gray-500">Pro</span></span>
                 </a>
-                <p class="text-gray-500 text-lg">We make PDF easybb.</p>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Transform, edit, and manage your PDF documents with ease. 
+                    <span class="block mt-1 font-medium text-gray-900">100% free, secure, and fast.</span>
+                </p>
             </div>
 
-            <!-- Solutions Column -->
+            <!-- Tools Column -->
             <div>
-                <h3 class="font-bold text-gray-900 mb-4">Solutions</h3>
+                <h3 class="font-bold text-gray-900 mb-4">Popular Tools</h3>
                 <ul class="space-y-3 text-sm text-gray-600">
-                    <li><a href="#" class="hover:text-gray-900">Sales</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Finance</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Real Estate</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Education</a></li>
+                    <li><a href="{{ route('tools.pdf-to-word') }}" class="hover:text-gray-900">PDF to Word</a></li>
+                    <li><a href="{{ route('tools.merge-pdf') }}" class="hover:text-gray-900">Merge PDF</a></li>
+                    <li><a href="{{ route('tools.compress-pdf') }}" class="hover:text-gray-900">Compress PDF</a></li>
+                    <li><a href="{{ route('tools.pdf-to-jpg') }}" class="hover:text-gray-900">PDF to JPG</a></li>
                 </ul>
             </div>
 
@@ -33,10 +36,10 @@
             <div>
                 <h3 class="font-bold text-gray-900 mb-4">Company</h3>
                 <ul class="space-y-3 text-sm text-gray-600">
-                    <li><a href="#" class="hover:text-gray-900">About</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Help</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Blog</a></li>
-                    <li><a href="#" class="hover:text-gray-900">PDF Statistics</a></li>
+                    <li><a href="{{ route('pages.about') }}" class="hover:text-gray-900">About Us</a></li>
+                    <li><a href="{{ route('pages.help') }}" class="hover:text-gray-900">Help Center</a></li>
+                    <li><a href="{{ route('pages.blog') }}" class="hover:text-gray-900">Blog</a></li>
+                    <li><a href="{{ route('pages.careers') }}" class="hover:text-gray-900">Careers</a></li>
                 </ul>
             </div>
 
@@ -44,21 +47,21 @@
             <div>
                 <h3 class="font-bold text-gray-900 mb-4">Product</h3>
                 <ul class="space-y-3 text-sm text-gray-600">
-                    <li><a href="#" class="hover:text-gray-900">Embed PDF</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Developers</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Sign.com</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Compare</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Accessible PDF</a></li>
+                    <li><a href="{{ route('pages.features') }}" class="hover:text-gray-900">Features</a></li>
+                    <li><a href="{{ route('pages.developers') }}" class="hover:text-gray-900">API & Developers</a></li>
+                    <li><a href="{{ route('pages.pricing') }}" class="hover:text-gray-900">Pricing</a></li>
+                    <li><a href="{{ route('pages.security') }}" class="hover:text-gray-900">Security</a></li>
                 </ul>
             </div>
 
-            <!-- Apps Column -->
+            <!-- Resources Column -->
             <div>
-                <h3 class="font-bold text-gray-900 mb-4">Apps</h3>
+                <h3 class="font-bold text-gray-900 mb-4">Resources</h3>
                 <ul class="space-y-3 text-sm text-gray-600">
-                    <li><a href="#" class="hover:text-gray-900">Download EasyPDF</a></li>
-                    <li><a href="#" class="hover:text-gray-900">PDF Scanner</a></li>
-                    <li><a href="#" class="hover:text-gray-900">Windows App</a></li>
+                    <li><a href="{{ route('pages.contact') }}" class="hover:text-gray-900">Contact Us</a></li>
+                    <li><a href="{{ route('pages.press') }}" class="hover:text-gray-900">Press & Media</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Mobile Apps</a></li>
+                    <li><a href="#" class="hover:text-gray-900">Browser Extension</a></li>
                 </ul>
             </div>
         </div>
@@ -143,10 +146,10 @@
                 people of the internet.
             </div>
             <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
-                <a href="#" class="hover:text-gray-900">Privacy Notice</a>
-                <a href="#" class="hover:text-gray-900">Terms & Conditions</a>
-                <a href="#" class="hover:text-gray-900">Imprint</a>
-                <a href="#" class="hover:text-gray-900">Contact Us</a>
+                <a href="{{ route('pages.privacy-policy') }}" class="hover:text-gray-900">Privacy Policy</a>
+                <a href="{{ route('pages.terms-conditions') }}" class="hover:text-gray-900">Terms & Conditions</a>
+                <a href="{{ route('pages.security') }}" class="hover:text-gray-900">Security</a>
+                <a href="{{ route('pages.contact') }}" class="hover:text-gray-900">Contact Us</a>
                 <a href="#" class="flex items-center hover:text-gray-900">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
