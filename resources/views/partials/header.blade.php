@@ -42,20 +42,20 @@
                         x-transition:leave="transition ease-in duration-150"
                         x-transition:leave-start="opacity-100 translate-y-0"
                         x-transition:leave-end="opacity-0 translate-y-1"
-                        class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
-                        style="width: 90vw; max-width: 1200px; min-width: 320px;">
+                        class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 max-h-[80vh] overflow-y-auto"
+                        style="width: 95vw; max-width: 1100px; min-width: 320px;">
                         
-                        <div class="p-6 lg:p-8">
-                            <div class="mb-6 text-center">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">PDF Tools</h3>
-                                <p class="text-sm text-gray-600">All the tools you need to work with PDFs - completely free and secure</p>
+                        <div class="p-4 lg:p-5">
+                            <div class="mb-4 text-center">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">PDF Tools</h3>
+                                <p class="text-xs text-gray-600">All the tools you need to work with PDFs - completely free and secure</p>
                             </div>
                             
-                            <!-- Tools Grid - Responsive -->
-                            <div class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
+                            <!-- Tools Grid - Responsive & Compact -->
+                            <div class="grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-2 lg:gap-3">
                                 <!-- PDF to Word -->
-                                <a href="{{ route('tools.pdf-to-word') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.pdf-to-word') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#4DABF7" />
                                             <path d="M14 16H22V24H14V16Z" fill="white" />
@@ -63,194 +63,194 @@
                                             <path d="M26 22H34" stroke="white" stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-blue-600">PDF to Word</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Convert to DOC/DOCX</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-blue-600">PDF to Word</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Convert to DOC</p>
                                 </a>
 
                                 <!-- Merge PDF -->
-                                <a href="{{ route('tools.merge-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.merge-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#FF6B6B" />
                                             <path d="M16 24H32" stroke="white" stroke-width="3" stroke-linecap="round" />
                                             <path d="M24 16L28 20L24 24" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-red-600">Merge PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Combine multiple PDFs</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-red-600">Merge PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Combine PDFs</p>
                                 </a>
 
                                 <!-- Split PDF -->
-                                <a href="{{ route('tools.split-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.split-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#FF6B6B" />
                                             <path d="M24 14V34" stroke="white" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4" />
                                             <path d="M18 20L14 24L18 28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-red-600">Split PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Extract pages</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-red-600">Split PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Extract pages</p>
                                 </a>
 
                                 <!-- Compress PDF -->
-                                <a href="{{ route('tools.compress-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.compress-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#51CF66" />
                                             <path d="M24 14V34" stroke="white" stroke-width="3" stroke-linecap="round" />
                                             <path d="M32 26L24 34L16 26" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-green-600">Compress PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Reduce file size</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-green-600">Compress PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Reduce size</p>
                                 </a>
 
                                 <!-- PDF to JPG -->
-                                <a href="{{ route('tools.pdf-to-jpg') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.pdf-to-jpg') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#FFD43B" />
                                             <rect x="14" y="14" width="20" height="20" rx="2" stroke="white" stroke-width="3" />
                                             <circle cx="20" cy="20" r="2" fill="white" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-yellow-600">PDF to JPG</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Convert to images</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-yellow-600">PDF to JPG</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">To images</p>
                                 </a>
 
                                 <!-- JPG to PDF -->
-                                <a href="{{ route('tools.jpg-to-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.jpg-to-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#FCC419" />
                                             <path d="M14 14H34V34H14V14Z" stroke="white" stroke-width="3" stroke-linejoin="round" />
                                             <path d="M24 20V28" stroke="white" stroke-width="3" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-yellow-600">JPG to PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Images to PDF</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-yellow-600">JPG to PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Images to PDF</p>
                                 </a>
 
                                 <!-- PDF to Excel -->
-                                <a href="{{ route('tools.pdf-to-excel') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.pdf-to-excel') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#69DB7C" />
                                             <path d="M14 16H22V24H14V16Z" fill="white" />
                                             <path d="M26 18H34" stroke="white" stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-green-600">PDF to Excel</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Extract tables</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-green-600">PDF to Excel</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Extract tables</p>
                                 </a>
 
                                 <!-- Word to PDF -->
-                                <a href="{{ route('tools.word-to-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.word-to-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#74C0FC" />
                                             <path d="M34 16H26V24H34V16Z" fill="white" />
                                             <path d="M22 18H14" stroke="white" stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-blue-600">Word to PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">DOC/DOCX to PDF</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-blue-600">Word to PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">DOC to PDF</p>
                                 </a>
 
                                 <!-- PDF to PowerPoint -->
-                                <a href="{{ route('tools.pdf-to-powerpoint') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.pdf-to-powerpoint') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#FF922B" />
                                             <path d="M14 16H22V24H14V16Z" fill="white" />
                                             <path d="M26 18H34" stroke="white" stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-orange-600">PDF to PowerPoint</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Convert to PPT/PPTX</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-orange-600">PDF to PowerPoint</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">To PPT</p>
                                 </a>
 
                                 <!-- PowerPoint to PDF -->
-                                <a href="{{ route('tools.powerpoint-to-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.powerpoint-to-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#FFA94D" />
                                             <path d="M34 16H26V24H34V16Z" fill="white" />
                                             <path d="M22 18H14" stroke="white" stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-orange-600">PowerPoint to PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">PPT/PPTX to PDF</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-orange-600">PowerPoint to PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">PPT to PDF</p>
                                 </a>
 
                                 <!-- Excel to PDF -->
-                                <a href="{{ route('tools.excel-to-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.excel-to-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#8CE99A" />
                                             <path d="M34 16H26V24H34V16Z" fill="white" />
                                             <path d="M22 18H14" stroke="white" stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-green-600">Excel to PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">XLS/XLSX to PDF</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-green-600">Excel to PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">XLS to PDF</p>
                                 </a>
 
                                 <!-- Edit PDF -->
-                                <a href="{{ route('tools.edit-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.edit-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#B197FC" />
                                             <path d="M16 32H32" stroke="white" stroke-width="3" stroke-linecap="round" />
                                             <path d="M24 16V28" stroke="white" stroke-width="3" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-purple-600">Edit PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Add text & images</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-purple-600">Edit PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Add text</p>
                                 </a>
 
                                 <!-- Sign PDF -->
-                                <a href="{{ route('tools.sign-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.sign-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#748FFC" />
                                             <path d="M28 14L34 20L20 34H14V28L28 14Z" stroke="white" stroke-width="3" stroke-linejoin="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-indigo-600">Sign PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Electronic signature</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-indigo-600">Sign PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">E-signature</p>
                                 </a>
 
                                 <!-- Watermark PDF -->
-                                <a href="{{ route('tools.watermark-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.watermark-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#F06595" />
                                             <circle cx="24" cy="24" r="10" stroke="white" stroke-width="3" />
                                             <path d="M18 24H30" stroke="white" stroke-width="3" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-pink-600">Watermark PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Add watermarks</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-pink-600">Watermark PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Add watermark</p>
                                 </a>
 
                                 <!-- Rotate PDF -->
-                                <a href="{{ route('tools.rotate-pdf') }}" class="group p-3 lg:p-4 rounded-lg hover:bg-gray-50 transition-colors text-center">
-                                    <div class="w-10 h-10 lg:w-12 lg:h-12 mb-2 lg:mb-3 mx-auto">
+                                <a href="{{ route('tools.rotate-pdf') }}" class="group p-2 lg:p-3 rounded-lg hover:bg-gray-50 transition-colors text-center">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 mx-auto">
                                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                             <rect x="8" y="8" width="32" height="32" rx="4" fill="#20C997" />
                                             <path d="M24 14V22" stroke="white" stroke-width="3" stroke-linecap="round" />
                                             <path d="M32 16L16 32" stroke="white" stroke-width="3" stroke-linecap="round" />
                                         </svg>
                                     </div>
-                                    <h4 class="font-semibold text-gray-900 text-xs lg:text-sm mb-1 group-hover:text-teal-600">Rotate PDF</h4>
-                                    <p class="text-xs text-gray-500 hidden lg:block">Rotate pages</p>
+                                    <h4 class="font-semibold text-gray-900 text-xs group-hover:text-teal-600">Rotate PDF</h4>
+                                    <p class="text-xs text-gray-500 hidden xl:block">Rotate pages</p>
                                 </a>
                             </div>
 
                             <!-- View All Tools Link -->
-                            <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+                            <div class="mt-4 pt-4 border-t border-gray-200 text-center">
                                 <a href="{{ url('/') }}" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700">
                                     View all tools on homepage
                                     <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
